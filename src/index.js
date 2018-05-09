@@ -11,6 +11,9 @@ import Register from '@/container/register/Register';
 import AuthRouter from '@/components/authRouter/AuthRouter';
 import BossInfo from '@/container/bossInfo/BossInfo';
 import GeniusInfo from '@/container/geniusInfo/GeniusInfo';
+import Dashborad from '@/components/dashborad/Dashborad';
+
+import './sass/navLinkBar.css';
 
 
 import reducers from './redux/reducer';
@@ -24,10 +27,13 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <AuthRouter></AuthRouter>
-                <Route path='/login' component={ Login }></Route>
-                <Route path='/register' component={ Register }></Route>
-                <Route path='/bossInfo' component={ BossInfo }></Route>
-                <Route path='/geniusInfo' component={ GeniusInfo }></Route>
+                <Switch>
+                    <Route path='/login' component={ Login }></Route>
+                    <Route path='/register' component={ Register }></Route>
+                    <Route path='/bossInfo' component={ BossInfo }></Route>
+                    <Route path='/geniusInfo' component={ GeniusInfo }></Route>
+                    <Route component={ Dashborad }></Route>
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>,

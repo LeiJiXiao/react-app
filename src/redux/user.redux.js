@@ -36,7 +36,7 @@ export const userReducer = ( state = initState, action ) => {
 
 //action
 export const authSuccess = ( obj ) => {
-    const {passward, _id, ...data} = obj;
+    const { passward, _id, ...data } = obj;
     return { data, type: AUTH_SUCCESS }
 };
 export const errorMsg = ( msg ) => {

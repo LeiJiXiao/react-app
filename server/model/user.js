@@ -89,8 +89,21 @@ function updateUserInfo (req, res) {
 }
 
 function allUserList ( req, res ) {
+    console.log( 'allUserList' )
     User.find( {}, ( e, d ) => {
         res.json( d );
+    } );
+}
+
+function list( req, res ) {
+    const { type } = req.query;
+    User.find( { type }, ( err, doc ) => {
+        if ( err ) {
+            res.json( { code: 0, msg: '服务器错误！' } );
+        }
+        res.json( { code: 1, msg: '请求成功！', tips: {
+            data: doc
+        } } );
     } );
 }
 
@@ -99,5 +112,6 @@ module.exports = {
     login,
     userInfo,
     allUserList,
-    updateUserInfo
+    updateUserInfo,
+    list
 };
