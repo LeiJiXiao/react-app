@@ -9,6 +9,14 @@ const paths = require('./paths');
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
 
+const htmlPluginsAray = paths.htmlArray.map((v)=> {
+    const fileParse = path.parse(v);
+    return {
+        from: new RegExp(`^\/${fileParse.base}`), to: `/build/${fileParse.base}`
+    };
+});
+
+
 module.exports = function(proxy, allowedHost) {
   return {
     // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
@@ -56,8 +64,9 @@ module.exports = function(proxy, allowedHost) {
     // updated. The WebpackDevServer client is included as an entry point
     // in the Webpack development configuration. Note that only changes
     // to CSS are currently hot reloaded. JS changes will refresh the browser.
+    inline: true,
     hot: true,
-    // It is important to tell WebpackDevServer to use the same "root" path
+      // It is important to tell WebpackDevServer to use the same "root" path
     // as we specified in the config. In development, we always serve from /.
     publicPath: config.output.publicPath,
     // WebpackDevServer is noisy by default so we emit custom message instead
@@ -83,6 +92,7 @@ module.exports = function(proxy, allowedHost) {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebookincubator/create-react-app/issues/387.
       disableDotRule: true,
+        rewrites: htmlPluginsAray
     },
     public: allowedHost,
     proxy,

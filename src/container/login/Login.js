@@ -53,9 +53,9 @@ export default class Login extends Component {
                         <InputItem placeholder="请填写密码" onChange={ v => this.handelChange( 'password', v ) }>密码</InputItem>
                     </List>
                     <WhiteSpace />
-                    <Button type="primary" onClick={ this.loginHandel }>登录</Button>
+                    <Button type="primary" onClick={ this.loginHandel }>23登录</Button>
                     <WhiteSpace />
-                    <Button type="primary" onClick={ this.toRegister }>注册</Button>
+                    <Button type="primary" onClick={ this.toRegister }>1d注册</Button>
                 </WingBlank>
             </div>
         )
