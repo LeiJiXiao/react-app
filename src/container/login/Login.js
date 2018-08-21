@@ -13,6 +13,7 @@ import {
     toast } from 'antd-mobile';
 
 import Logo from '@/components/logo/Logo';
+import SlideValids from '@/components/SlideValids';
 import { loginHandel } from '@/redux/user.redux';
 
 @connect(
@@ -22,7 +23,8 @@ import { loginHandel } from '@/redux/user.redux';
 export default class Login extends Component {
     state = {
         user: '',
-        password: ''
+        password: '',
+        slideValidStatus: false
     };
     toRegister = () => {
         this.props.history.push( '/Register' );
@@ -41,9 +43,18 @@ export default class Login extends Component {
             this.props.loginHandel( this.state );
         }
     };
+    checkSlideValid = valid => {
+        this.setState({
+            slideValidStatus: valid
+        });
+        setTimeout(function(){
+            alert(`解锁成功！${valid}`,);
+        },100);
+    }
     render() {
         return (
             <div>
+                <SlideValids checkSlideValidHandler={this.checkSlideValid}/>
                 { this.props.redirectTo? <Redirect to={ this.props.redirectTo }></Redirect> : null }
                 <Logo />
                 <WhiteSpace />
